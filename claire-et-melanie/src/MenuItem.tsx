@@ -1,0 +1,94 @@
+import { useEffect, useRef, useState } from "react";
+
+export interface IMenuSubCategory {
+    image: string;
+    angle: number;
+    linkTo?: string;
+    callback?: () => void;
+}
+
+interface IMenuItemProps {
+    onEnter: (index: number) => void;
+    onLeaveSubMenu: () => void;
+    image: string;
+    index: number;
+    linkTo?: string;
+    subCategories?: IMenuSubCategory[];
+    scale: number;
+}
+
+
+export default function MenuItem(props: IMenuItemProps) {
+    const [selected, setSelected] = useState(false);
+    const [categories, setCategories] = useState<IMenuSubCategory[]>();
+    const refAudio = useRef<HTMLAudioElement>(null);
+
+    useEffect(() => {
+        if (props.subCategories) {
+            setCategories([...props.subCategories,
+            {
+                image: 'back.png',
+                angle: props.subCategories[props.subCategories.length - 1].angle + 1,
+                callback: props.onLeaveSubMenu
+            }
+            ])
+
+        }
+    }, [])
+
+    const RADIUS = 40;
+    async function onClickButton() {
+        if (refAudio.current) {
+            refAudio.current.play();
+            setTimeout(() => {
+                if (props.linkTo) {
+                    window.location.href = props.linkTo;
+                }
+            }, refAudio.current.duration);
+            if (!props.linkTo) {
+                setSelected(true);
+                if (props.onEnter) {
+                    props.onEnter(props.index);
+                }
+                console.log(categories)
+                if (categories) {
+                    for (let i = 0; i < categories.length; ++i) {
+                        const elem = document.getElementById("subCategory" + i + props.image);
+                        elem?.animate([
+                            { top: '0vh', left: '0vw' },
+                            { top: `calc(${Math.sin(categories[i].angle) * RADIUS}vh)`, left: `calc(${Math.cos(categories[i].angle) * RADIUS}vw)` },
+                        ], { duration: 500, iterations: 1, fill: 'forwards', easing: 'ease-out' })
+                    }
+                }
+            }
+        }
+
+    }
+    function onClickButtonCategory(menu: IMenuSubCategory) {
+        // menu.linkTo
+        if (menu.linkTo) {
+            window.location.href = menu.linkTo;
+        }
+        if (menu.callback) {
+            menu.callback();
+            setSelected(false);
+        }
+    }
+
+    return <div>
+        <div style={{ transform: `scale(${props.scale})` }}>
+
+            <div onClick={onClickButton} id={"divMenuItem" + props.index} className="menuItem" style={{ cursor: 'pointer', width: "calc(max(17vw, 30vh)) ", aspectRatio: 1, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundImage: `url(${props.image})`, backgroundSize: 'contain' }}>
+            </div>
+            <audio ref={refAudio} src="JINGLE_CLAIRE_MELANIE.wav" preload="auto" />
+        </div>
+        {<div style={{ position: 'absolute' }}>
+            {categories && categories.map((el, i) =>
+                <div id={"subCategory" + i + props.image} style={{ visibility: selected ? 'visible' : 'hidden', position: 'absolute' }}>
+                    <div onClick={() => { onClickButtonCategory(el) }} className="menuItem water-wave" style={{ cursor: 'pointer', width: "calc(max(20vw, 30vh)) ", aspectRatio: 1, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', maskPosition: 'center', maskRepeat: 'no-repeat', maskSize: 'contain', maskImage: `url(./Maskblob.png)`, backgroundImage: `url(${el.image})`, backgroundSize: 'cover' }}>
+                    </div>
+                </div>
+            )}
+        </div>}
+    </div>
+}
