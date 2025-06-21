@@ -10,6 +10,7 @@ interface IMenuItem {
   left: number;
   linkTo?: string;
   subCategories?: IMenuSubCategory[];
+  categoryName?:string;
 }
 
 const menuItems: IMenuItem[] = [
@@ -17,16 +18,19 @@ const menuItems: IMenuItem[] = [
     image: './objects/bouche.png',
     top: 10, left: -10,
     scale: 1.2,
+    categoryName: "Le théatre",
     subCategories: [
       {
-        linkTo: 'variete.html',
-        image: './objects/cheminee.jpg',
-        angle: 1.5
+        linkTo: 'https://www.claire-et-melanie.com/articles/boulevard-du-queer',
+        image: './menuImages/BoulevardDuQueer.jpg',
+        angle: 1.5,
+        title: 'Boulevard du Queer'
       },
       {
-        linkTo: 'sketch.html',
-        image: './objects/cheminee.jpg',
-        angle: 2.5
+        linkTo: 'https://www.claire-et-melanie.com/articles/au-theatre-ce-soir',
+        image: './menuImages/fisheye.png',
+        angle: 2.5,
+        title: 'Boulevard Augmenté'
       }
     ]
   },
@@ -34,43 +38,34 @@ const menuItems: IMenuItem[] = [
     image: './objects/BOY.png',
     top: -10, left: -20,
     scale: 0.7,
-    linkTo: 'boy.com'
+    linkTo: 'https://www.claire-et-melanie.com/articles/qui-sont-claire-melanie'
   },
   {
     image: './objects/chaussette.png',
     top: 15, left: 23,
     scale: 1.2,
-    subCategories: [
-      {
-        linkTo: 'theatre1.html',
-        image: './objects/cheminee.jpg',
-        angle: 0
-      },
-      {
-        linkTo: 'theatre2.html',
-        image: './objects/cheminee.jpg',
-        angle: 0.7
-      }
-    ]
+    linkTo: 'https://www.claire-et-melanie.com/articles/tv-de-clairemelanie'
+
   },
   {
     image: './objects/Brain.png',
     top: -10, left: 20,
     scale: 1.,
-    linkTo: 'bio.html'
+    linkTo: 'https://www.tiktok.com/@claireetmelanie?_t=ZN-8xOHostvrYU&_r=1'
 
   },
   {
     image: './objects/glacepistache.png',
     top: -10, left: 10,
     scale: 1.4,
-    linkTo: 'pistache.html'
+    linkTo: 'https://www.instagram.com/claireetmelanie/'
   },
 ]
 
 function App() {
   const refClairDiv = useRef<HTMLDivElement>(null);
   const [ subMenuIndex, setSubMenuIndex ] = useState(-1);
+  const [ categoryName, setCategoryName ] = useState("");
   function onEnterSubMenu(index: number) {
     setSubMenuIndex(index);
   }
@@ -78,6 +73,12 @@ function App() {
   function onQuitSubMenu() {
     setSubMenuIndex(-1);
   }
+  useEffect(()=>{
+    if (subMenuIndex < 0)
+      setCategoryName("");
+    else
+      setCategoryName(menuItems[subMenuIndex].categoryName ?? "");
+  }, [subMenuIndex])
 
   useEffect(()=>{
     if (refClairDiv.current) {
@@ -88,7 +89,7 @@ function App() {
             const centerOffX = '50px'
             const centerOffY = '65%'
             const globOffX = '100px'
-            const globOffY = '120px'
+            const globOffY = '10%'
             const offX = menuItems[i].left;
             const offY = menuItems[i].top;
             elem.animate([
@@ -103,8 +104,13 @@ function App() {
 
   return (
       <div style={{width: '100%', height: '100%', position: 'relative', overflow: 'hidden'}}>
-        <div style={{position: 'absolute', zIndex: 99, color: 'white', fontFamily: 'Fulldozer', fontSize: '30pt', marginTop: '50px', left: '50%', transform: 'translateX(-50%)'}}>
-          Claire & Mélanie
+        <div style={{position: 'absolute', zIndex: 99, color: 'white', width: "400px", fontFamily: 'Fulldozer', fontSize: '200%', marginTop: '16px', left: '50%', transform: 'translateX(-50%)'}}>
+        <div>
+            Claire & Mélanie
+          </div>
+          <div style={{fontSize: '70%', textAlign: 'center'}}>
+            {categoryName}
+          </div>
         </div>
         <div id="claireEtMelFaces" style={{}}>
           <div ref={refClairDiv} style={{animation: 'claireanim', top: -50, animationDuration: '2s', animationFillMode: 'forwards', position: 'absolute', left:'100%', width:1500, aspectRatio: 1, backgroundSize: 'cover', backgroundImage: 'url(./Claire.png)'}}></div>

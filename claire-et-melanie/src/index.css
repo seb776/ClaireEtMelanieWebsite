@@ -138,10 +138,10 @@ html, body, #root {
   src: url('/Fulldozer.otf');
 }
 #claireEtMelFaces {
-  transform: translateY(-1100px) scale(3);
+  transform: translateY(-700px) scale(2);
 }
 @media only screen and (max-width: 800px) {
   #claireEtMelFaces {
-    transform: translateY(-850px) scale(2.2);
+    transform: translateY(-700px) scale(2);
   }
 }

@@ -4,6 +4,7 @@ export interface IMenuSubCategory {
     image: string;
     angle: number;
     linkTo?: string;
+    title?: string;
     callback?: () => void;
 }
 
@@ -29,7 +30,7 @@ export default function MenuItem(props: IMenuItemProps) {
             {
                 image: 'back.png',
                 angle: props.subCategories[props.subCategories.length - 1].angle + 1,
-                callback: props.onLeaveSubMenu
+                callback: props.onLeaveSubMenu,
             }
             ])
 
@@ -77,9 +78,9 @@ export default function MenuItem(props: IMenuItemProps) {
 
     return <div>
         <div style={{ transform: `scale(${props.scale})` }}>
-
-            <div onClick={onClickButton} id={"divMenuItem" + props.index} className="menuItem" style={{ cursor: 'pointer', width: "calc(max(17vw, 30vh)) ", aspectRatio: 1, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundImage: `url(${props.image})`, backgroundSize: 'contain' }}>
-            </div>
+            
+            <a href={props.linkTo?.includes('claire-et-melanie.com') ? '' : props.linkTo} target="_blank" onClick={onClickButton} id={"divMenuItem" + props.index} className="menuItem" style={{ cursor: 'pointer', width: "calc(max(17vw, 30vh)) ", aspectRatio: 1, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundImage: `url(${props.image})`, backgroundSize: 'contain' }}>
+            </a>
             <audio ref={refAudio} src="JINGLE_CLAIRE_MELANIE.wav" preload="auto" />
         </div>
         {<div style={{ position: 'absolute' }}>
@@ -87,6 +88,9 @@ export default function MenuItem(props: IMenuItemProps) {
                 <div id={"subCategory" + i + props.image} style={{ visibility: selected ? 'visible' : 'hidden', position: 'absolute' }}>
                     <div onClick={() => { onClickButtonCategory(el) }} className="menuItem water-wave" style={{ cursor: 'pointer', width: "calc(max(20vw, 30vh)) ", aspectRatio: 1, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', maskPosition: 'center', maskRepeat: 'no-repeat', maskSize: 'contain', maskImage: `url(./Maskblob.png)`, backgroundImage: `url(${el.image})`, backgroundSize: 'cover' }}>
                     </div>
+                        <div style={{position: 'absolute', pointerEvents: 'none', fontSize: '20pt', color:'#3AFF47', fontWeight: 'bold', zIndex: 99, left: '50%', top: '50%', textAlign: 'center', textWrap: 'wrap', transform: 'translate(-50%)'}}>
+                            {el.title}
+                        </div>
                 </div>
             )}
         </div>}
