@@ -43,7 +43,7 @@ export default function MenuItem(props: IMenuItemProps) {
             refAudio.current.play();
             setTimeout(() => {
                 if (props.linkTo) {
-                    window.location.href = props.linkTo;
+                    //window.location.href = props.linkTo;
                 }
             }, refAudio.current.duration);
             if (!props.linkTo) {
@@ -79,7 +79,7 @@ export default function MenuItem(props: IMenuItemProps) {
     return <div>
         <div style={{ transform: `scale(${props.scale})` }}>
             
-            <a href={props.linkTo?.includes('claire-et-melanie.com') ? '' : props.linkTo} target="_blank" onClick={onClickButton} id={"divMenuItem" + props.index} className="menuItem" style={{ cursor: 'pointer', width: "calc(max(17vw, 30vh)) ", aspectRatio: 1, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundImage: `url(${props.image})`, backgroundSize: 'contain' }}>
+            <a href={props.linkTo} target="_top" onClick={onClickButton} id={"divMenuItem" + props.index} className="menuItem" style={{ cursor: 'pointer', width: "calc(max(17vw, 30vh)) ", aspectRatio: 1, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundImage: `url(${props.image})`, backgroundSize: 'contain' }}>
             </a>
             <audio ref={refAudio} src="JINGLE_CLAIRE_MELANIE.wav" preload="auto" />
         </div>
