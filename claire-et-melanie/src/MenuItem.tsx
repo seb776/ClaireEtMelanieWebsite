@@ -40,7 +40,8 @@ export default function MenuItem(props: IMenuItemProps) {
     const RADIUS = 40;
     async function onClickButton() {
         if (refAudio.current) {
-            refAudio.current.play();
+            if (!props.linkTo) // avoid cutting the sound when page redirects 
+                refAudio.current.play();
             setTimeout(() => {
                 if (props.linkTo) {
                     //window.location.href = props.linkTo;
