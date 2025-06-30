@@ -104,7 +104,7 @@ function App() {
 
   return (
       <div style={{width: '100%', height: '100%', position: 'relative', overflow: 'hidden'}}>
-        <div style={{position: 'absolute', zIndex: 99, color: 'white', width: "400px", fontFamily: 'Fulldozer', fontSize: '200%', marginTop: '16px', left: '50%', transform: 'translateX(-50%)'}}>
+        <div style={{position: 'absolute', zIndex: 99, color: 'white', textAlign: 'center', width: "max(300px, 50%)", fontFamily: 'Fulldozer', fontSize: '200%', marginTop: '16px', left: '50%', transform: 'translateX(-50%)'}}>
         <div>
             Claire & Mélanie
           </div>
