@@ -142,6 +142,6 @@ html, body, #root {
 }
 @media only screen and (max-width: 800px) {
   #claireEtMelFaces {
-    transform: translateY(-700px) scale(2);
+    transform: translateY(-550px) scale(1.7);
   }
 }

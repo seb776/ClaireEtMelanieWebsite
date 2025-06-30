@@ -88,7 +88,7 @@ function App() {
           if (elem) {
             const centerOffX = '50px'
             const centerOffY = '65%'
-            const globOffX = '100px'
+            const globOffX = '50px'
             const globOffY = '10%'
             const offX = menuItems[i].left;
             const offY = menuItems[i].top;
