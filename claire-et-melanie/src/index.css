@@ -142,7 +142,7 @@ body {
   src: url('/Fulldozer.otf');
 }
 #claireEtMelFaces {
-  transform: translateY(-340px) scale(2.6);
+  transform: translateY(-300px) scale(1.6);
 }
 #root {
   aspect-ratio: 16/9;
@@ -150,7 +150,7 @@ body {
 }
 @media only screen and (max-width: 800px) {
   #claireEtMelFaces {
-    transform: translateY(-80px) scale(1.15);
+    transform: translateY(-100px) scale(0.9);
   }
   #root {
     aspect-ratio: 9/20;
