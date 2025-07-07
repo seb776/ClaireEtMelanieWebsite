@@ -29,7 +29,7 @@ export default function MenuItem(props: IMenuItemProps) {
             setCategories([...props.subCategories,
             {
                 image: 'back.png',
-                angle: props.subCategories[props.subCategories.length - 1].angle + 1,
+                angle: props.subCategories[props.subCategories.length - 1].angle + 0.7,
                 callback: props.onLeaveSubMenu,
             }
             ])
@@ -88,7 +88,7 @@ export default function MenuItem(props: IMenuItemProps) {
                 <div id={"subCategory" + i + props.image} style={{ visibility: selected ? 'visible' : 'hidden', position: 'absolute' }}>
                     <div onClick={() => { onClickButtonCategory(el) }} className="menuItem water-wave" style={{ cursor: 'pointer', width: "calc(max(20vw, 30vh)) ", aspectRatio: 1, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', maskPosition: 'center', maskRepeat: 'no-repeat', maskSize: 'contain', maskImage: `url(./Maskblob.png)`, backgroundImage: `url(${el.image})`, backgroundSize: 'cover' }}>
                     </div>
-                        <div style={{position: 'absolute', pointerEvents: 'none', fontSize: '20pt', color:'#3AFF47', fontWeight: 'bold', zIndex: 99, left: '50%', top: '50%', textAlign: 'center', textWrap: 'wrap', transform: 'translate(-50%)'}}>
+                        <div style={{position: 'absolute', pointerEvents: 'none', fontSize: '25pt', color:'#3AFF47', fontWeight: 'bold', zIndex: 99, left: '50%', top: '50%', textAlign: 'center', textWrap: 'wrap', transform: 'translate(-50%, -50%)', filter: 'drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5))'}}>
                             {el.title}
                         </div>
                 </div>

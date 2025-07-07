@@ -21,6 +21,10 @@ html, body, #root {
   margin: 0;
 }
 
+body {
+  overflow: hidden;
+}
+
 
 /* The animation code */
 @keyframes claireanim {
@@ -138,10 +142,30 @@ html, body, #root {
   src: url('/Fulldozer.otf');
 }
 #claireEtMelFaces {
-  transform: translateY(-220px) scale(1.3);
+  transform: translateY(-340px) scale(2.6);
+}
+#root {
+  aspect-ratio: 16/9;
+  height: unset !important;
 }
 @media only screen and (max-width: 800px) {
   #claireEtMelFaces {
     transform: translateY(-80px) scale(1.15);
   }
+  #root {
+    aspect-ratio: 9/20;
+    height: unset !important;
+  }
 }
+/* tablets */
+@media only screen and (min-width: 800px) and (max-width: 900px) {
+  #root {
+    aspect-ratio: 9/16;
+    height: unset !important;
+  }
+  #claireEtMelFaces {
+    transform: translateY(-80px) scale(1.3);
+  }
+}
+
+

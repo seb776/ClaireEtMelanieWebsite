@@ -23,13 +23,13 @@ const menuItems: IMenuItem[] = [
       {
         linkTo: 'https://www.claire-et-melanie.com/articles/boulevard-du-queer',
         image: './menuImages/BoulevardDuQueer.jpg',
-        angle: 1.5,
+        angle: 2.0,
         title: 'Boulevard du Queer'
       },
       {
         linkTo: 'https://www.claire-et-melanie.com/articles/au-theatre-ce-soir',
         image: './menuImages/fisheye.png',
-        angle: 2.5,
+        angle: 2.8,
         title: 'Boulevard Augmenté'
       }
     ]
@@ -89,7 +89,7 @@ function App() {
             const centerOffX = '50px'
             const centerOffY = '65%'
             const globOffX = '50px'
-            const globOffY = '10%'
+            const globOffY = 'min(25vh, 25vw)'
             const offX = menuItems[i].left;
             const offY = menuItems[i].top;
             elem.animate([
