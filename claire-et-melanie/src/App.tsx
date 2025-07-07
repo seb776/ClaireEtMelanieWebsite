@@ -48,7 +48,7 @@ const menuItems: IMenuItem[] = [
 
   },
   {
-    image: './objects/Brain.png',
+    image: './objects/BrainWebsite.png',
     top: -10, left: 20,
     scale: 1.,
     linkTo: 'https://www.tiktok.com/@claireetmelanie?_t=ZN-8xOHostvrYU&_r=1'
