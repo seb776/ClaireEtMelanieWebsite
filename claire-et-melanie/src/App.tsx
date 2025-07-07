@@ -95,7 +95,7 @@ function App() {
             elem.animate([
               {top: `calc(${centerOffY})`, left: `calc(50% - ${centerOffX})`, visibility: 'hidden', transform: 'scale(0)'},
               {top: `calc(50%  - 1.5 * ${offY}% - ${globOffY})`, left: `calc(50% - 1.5 * ${offX}% - ${globOffX})`, visibility: 'visible', transform: 'scale(1)'}
-            ], {delay: 500+i*1000*0.8, duration: 1000, iterations: 1, fill: 'forwards', easing: 'ease-out'})
+            ], {delay: 100+i*1000*0.5, duration: 850, iterations: 1, fill: 'forwards', easing: 'linear(0, 0.417 25.5%, 0.867 49.4%, 1 57.7%, 0.925 65.1%, 0.908 68.6%, 0.902 72.2%, 0.916 78.2%, 0.988 92.1%, 1)'})
           }
         }
       });
