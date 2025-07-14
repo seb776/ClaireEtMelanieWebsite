@@ -69,7 +69,13 @@ const menuItems: IMenuItem[] = [
 ]
 
 function App() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const stopAnim = urlParams.get('stopAnim');
+
   const refClairDiv = useRef<HTMLDivElement>(null);
+  const refMelDiv = useRef<HTMLDivElement>(null);
+
+  
   const [ subMenuIndex, setSubMenuIndex ] = useState(-1);
   const [ categoryName, setCategoryName ] = useState("");
   function onEnterSubMenu(index: number) {
@@ -87,7 +93,13 @@ function App() {
   }, [subMenuIndex])
 
   useEffect(()=>{
+    
     if (refClairDiv.current) {
+      if (stopAnim) {
+        refClairDiv.current.style.animationDuration = "0s";
+      if (refMelDiv.current)
+        refMelDiv.current.style.animationDuration = "0s";
+      }
       refClairDiv.current.addEventListener("animationend", ()=>{
         for (let i = 0; i < menuItems.length; ++i) {
           const elem = document.getElementById("divMenuItemParent" + i);
@@ -101,7 +113,7 @@ function App() {
             elem.animate([
               {top: `calc(${centerOffY})`, left: `calc(50% - ${centerOffX})`, visibility: 'hidden', transform: 'scale(0)'},
               {top: `calc(50%  - 1.5 * ${offY}% - ${globOffY})`, left: `calc(50% - 1.5 * ${offX}% - ${globOffX})`, visibility: 'visible', transform: 'scale(1)'}
-            ], {delay: 100+i*1000*0.5, duration: 850, iterations: 1, fill: 'forwards', easing: 'linear(0, 0.417 25.5%, 0.867 49.4%, 1 57.7%, 0.925 65.1%, 0.908 68.6%, 0.902 72.2%, 0.916 78.2%, 0.988 92.1%, 1)'})
+            ], {delay: (100+i*1000*0.5)*(stopAnim ? 0 : 1), duration: 850 * (stopAnim ? 0 : 1), iterations: 1, fill: 'forwards', easing: 'linear(0, 0.417 25.5%, 0.867 49.4%, 1 57.7%, 0.925 65.1%, 0.908 68.6%, 0.902 72.2%, 0.916 78.2%, 0.988 92.1%, 1)'})
           }
         }
       });
@@ -143,7 +155,7 @@ const [ confirmNav, setConfirmNav ] = useState<string | undefined>();
         </div>
         <div id="claireEtMelFaces" style={{}}>
           <div ref={refClairDiv} style={{animation: 'claireanim', top: -50, animationDuration: '2s', animationFillMode: 'forwards', position: 'absolute', left:'100%', width:1500, aspectRatio: 1, backgroundSize: 'cover', backgroundImage: 'url(./Claire.png)'}}></div>
-          <div style={{animation: 'melanim', top: -80, animationDuration: '2s', animationFillMode: 'forwards', position: 'absolute', left:'100%', width:1250, aspectRatio: 1, backgroundSize: 'cover', backgroundImage: 'url(./Melanie.png)'}}></div>
+          <div ref={refMelDiv} style={{animation: 'melanim', top: -80, animationDuration: '2s', animationFillMode: 'forwards', position: 'absolute', left:'100%', width:1250, aspectRatio: 1, backgroundSize: 'cover', backgroundImage: 'url(./Melanie.png)'}}></div>
         </div>
         {/* <div style={{position: 'absolute', transform: 'translateX(-50%)', width:1500, aspectRatio: 1, backgroundSize: 'cover', backgroundImage: 'url(./Melanie.png)'}}></div> */}
         {menuItems.map((el, i)=> 
