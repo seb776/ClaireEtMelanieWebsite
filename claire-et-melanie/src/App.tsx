@@ -11,9 +11,19 @@ interface IMenuItem {
   linkTo?: string;
   subCategories?: IMenuSubCategory[];
   categoryName?:string;
+  askConfirm?: boolean;
+  linkHint?: string;
 }
 
 const menuItems: IMenuItem[] = [
+  {
+    image: './objects/glacepistache.png',
+    top: -10, left: 7,
+    scale: 1.4,
+    askConfirm: true,
+    linkHint: 'Instagram',
+    linkTo: 'https://www.instagram.com/claireetmelanie/'
+  },
   {
     image: './objects/bouche.png',
     top: 10, left: -10,
@@ -49,17 +59,13 @@ const menuItems: IMenuItem[] = [
   },
   {
     image: './objects/BrainWebsite.png',
-    top: -10, left: 20,
+    top: -10, left: 23,
     scale: 1.,
+    askConfirm: true,
+    linkHint: 'Tik Tok',
     linkTo: 'https://www.tiktok.com/@claireetmelanie?_t=ZN-8xOHostvrYU&_r=1'
 
-  },
-  {
-    image: './objects/glacepistache.png',
-    top: -10, left: 10,
-    scale: 1.4,
-    linkTo: 'https://www.instagram.com/claireetmelanie/'
-  },
+  }
 ]
 
 function App() {
@@ -102,8 +108,31 @@ function App() {
     }
   }, []);
 
+  function onAskConfirm(url: string, hint?: string) {
+    setConfirmNav(url);
+    setNavHint(hint);
+  }
+const [ navHint, setNavHint] = useState<string | undefined>();
+const [ confirmNav, setConfirmNav ] = useState<string | undefined>();
   return (
+
       <div style={{width: '100%', height: '100%', position: 'relative', overflow: 'hidden'}}>
+                    {confirmNav &&
+                    <div style={{zIndex: 9990, position: 'absolute', width: '100%', height: '100%', background: "#49AE4EAA"}}>
+                <div className="menuItem water-wave" style={{fontSize:'18pt', alignItems: 'center', textAlign: 'center', zIndex: 9999, position: 'fixed', height: "300px", width: "300px", display: 'flex', flexDirection: 'column', aspectRatio: 1, top:'calc(50% - 150px)', left: 'calc(50% - 150px)' }}>
+                Vous aller sortir du site vers {navHint}.
+                <br/>
+                Êtes vous sûr de vouloir continuer ?
+                <div style={{display: 'flex', flexDirection: 'row'}}>
+                <a href={confirmNav} target="_top" className='confirm_button' style={{backgroundColor: '#fc41ff', textDecoration: 'none'}}>
+                    Oui
+                </a>
+                <button className='confirm_button' onClick={()=>setConfirmNav(undefined)} style={{backgroundColor: '#49AE4E'}}>Non</button>
+                </div>
+            </div>
+                      </div>
+            }
+
         <div style={{position: 'absolute', zIndex: 99, color: 'white', textAlign: 'center', width: "max(300px, 50%)", fontFamily: 'Fulldozer', fontSize: '200%', marginTop: '16px', left: '50%', transform: 'translateX(-50%)'}}>
         <div>
             Claire & Mélanie
@@ -120,7 +149,7 @@ function App() {
         {menuItems.map((el, i)=> 
         <div key={"divMenuItemParent" + i} id={"divMenuItemParent" + i} style={{position: 'absolute', top: '50%', left: '50%', visibility: 'hidden'}}>
           <div style={{display: subMenuIndex === -1 ? 'block' : (i === subMenuIndex ? 'block' : 'none')}}>
-          <MenuItem scale={el.scale} onEnter={onEnterSubMenu} onLeaveSubMenu={onQuitSubMenu} index={i} image={el.image} linkTo={el.linkTo} subCategories={el.subCategories}/>
+          <MenuItem scale={el.scale} hint={el.linkHint} onAskConfirm={onAskConfirm} askConfirm={el.askConfirm} onEnter={onEnterSubMenu} onLeaveSubMenu={onQuitSubMenu} index={i} image={el.image} linkTo={el.linkTo} subCategories={el.subCategories}/>
           </div>
           </div>
         )}

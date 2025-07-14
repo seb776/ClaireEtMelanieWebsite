@@ -168,4 +168,12 @@ body {
   }
 }
 
+.confirm_button {
+  color: white;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 15px;
+  font-size: 20pt;
+}
+
 

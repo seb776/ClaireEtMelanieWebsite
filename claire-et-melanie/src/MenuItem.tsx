@@ -16,6 +16,9 @@ interface IMenuItemProps {
     linkTo?: string;
     subCategories?: IMenuSubCategory[];
     scale: number;
+    askConfirm?: boolean;
+    onAskConfirm: (url: string, hint?: string) => void;
+    hint?: string;
 }
 
 
@@ -77,10 +80,15 @@ export default function MenuItem(props: IMenuItemProps) {
         }
     }
 
+
+
     return <div>
+
         <div style={{ transform: `scale(${props.scale})` }}>
-            <a href={props.linkTo} target="_top" onClick={onClickButton} id={"divMenuItem" + props.index} className="menuItem" style={{ cursor: 'pointer', width: "min(40vw, 30vh) ", aspectRatio: 1, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundImage: `url(${props.image})`, backgroundSize: 'contain' }}>
-            </a>
+            {props.askConfirm &&  <a  target="_top" onClick={()=>props.onAskConfirm(props.linkTo!, props.hint)} id={"divMenuItem" + props.index} className="menuItem" style={{ cursor: 'pointer', width: "min(40vw, 30vh) ", aspectRatio: 1, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundImage: `url(${props.image})`, backgroundSize: 'contain' }}>
+            </a>}
+            {!props.askConfirm && <a href={props.linkTo} target="_top" onClick={onClickButton} id={"divMenuItem" + props.index} className="menuItem" style={{ cursor: 'pointer', width: "min(40vw, 30vh) ", aspectRatio: 1, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundImage: `url(${props.image})`, backgroundSize: 'contain' }}>
+            </a>}
             <audio ref={refAudio} src="JINGLE_CLAIRE_MELANIE.wav" preload="auto" />
         </div>
         {<div style={{ position: 'absolute' }}>
