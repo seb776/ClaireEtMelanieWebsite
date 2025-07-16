@@ -149,7 +149,7 @@ body {
 }
 @media only screen and (max-width: 800px) {
   #claireEtMelFaces {
-    transform: translateY(-100px) scale(0.9);
+    transform: translateY(-150px) scale(0.9);
   }
   #root {
     aspect-ratio: 9/20;
