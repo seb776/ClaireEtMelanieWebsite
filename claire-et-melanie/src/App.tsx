@@ -128,7 +128,7 @@ const [ navHint, setNavHint] = useState<string | undefined>();
 const [ confirmNav, setConfirmNav ] = useState<string | undefined>();
   return (
 
-      <div style={{width: '100%', height: '100%', position: 'relative', overflow: 'hidden'}}>
+      <div style={{width: '100%', height: '100%', position: 'relative', overflow: 'visible'}}>
                     {confirmNav &&
                     <div style={{zIndex: 9990, position: 'absolute', width: '100%', height: '100%', background: "#49AE4EAA"}}>
                 <div className="menuItem water-wave" style={{fontSize:'18pt', alignItems: 'center', textAlign: 'center', zIndex: 9999, position: 'fixed', height: "300px", width: "300px", display: 'flex', flexDirection: 'column', aspectRatio: 1, top:'calc(50% - 150px)', left: 'calc(50% - 150px)' }}>
@@ -145,7 +145,7 @@ const [ confirmNav, setConfirmNav ] = useState<string | undefined>();
                       </div>
             }
 
-        <div style={{position: 'absolute', zIndex: 99, color: 'white', textAlign: 'center', width: "max(300px, 50%)", fontFamily: 'Fulldozer', fontSize: '200%', marginTop: '16px', left: '50%', transform: 'translateX(-50%)'}}>
+        <div style={{pointerEvents: 'none', position: 'absolute', zIndex: 99, color: 'white', textAlign: 'center', width: "max(300px, 50%)", fontFamily: 'Fulldozer', fontSize: '200%', marginTop: '16px', left: '50%', transform: 'translateX(-50%)'}}>
         <div>
             Claire & Mélanie
           </div>
